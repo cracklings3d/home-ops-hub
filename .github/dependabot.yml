@@ -9,7 +9,6 @@ updates:
     directory: "/backend"
     schedule:
       interval: "weekly"
-      day: "monday"
     open-pull-requests-limit: 5
     commit-message:
       prefix: "deps"
@@ -25,7 +24,6 @@ updates:
     directory: "/frontend"
     schedule:
       interval: "weekly"
-      day: "monday"
     open-pull-requests-limit: 5
     commit-message:
       prefix: "deps"
@@ -38,7 +36,6 @@ updates:
   - package-ecosystem: "github-actions"
     schedule:
       interval: "weekly"
-      day: "monday"
     open-pull-requests-limit: 3
     commit-message:
       prefix: "ci"
