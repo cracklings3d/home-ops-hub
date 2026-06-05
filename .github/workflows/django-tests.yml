@@ -1,0 +1,87 @@
+name: Django Backend Tests
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/django-tests.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'backend/**'
+
+jobs:
+  test:
+    name: Django Test & Lint
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: home_ops_hub_test
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          pip install coverage coverage-badge
+
+      - name: Run migrations
+        env:
+          DATABASE_URL: postgres://test_user:test_password@localhost:5432/home_ops_hub_test
+        run: |
+          cd backend
+          python manage.py migrate --settings=config.settings.ci
+
+      - name: Django system check
+        env:
+          DATABASE_URL: postgres://test_user:test_password@localhost:5432/home_ops_hub_test
+        run: |
+          cd backend
+          python manage.py check
+
+      - name: Run tests with coverage
+        env:
+          DATABASE_URL: postgres://test_user:test_password@localhost:5432/home_ops_hub_test
+          COVERAGE_PROCESS_START: .coveragerc
+        run: |
+          cd backend
+          coverage run manage.py test --settings=config.settings.ci
+          coverage combine
+          coverage report --show-missing
+          coverage xml
+        continue-on-error: true
+
+      - name: Upload coverage
+        if: always()
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./backend/coverage.xml
+          fail_ci_if_error: false
+
+      - name: Python lint
+        run: |
+          pip install ruff
+          cd backend
+          ruff check .
+        continue-on-error: true
