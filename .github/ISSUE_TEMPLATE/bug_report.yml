@@ -1,0 +1,72 @@
+name: Bug Report
+description: Report something that is broken or not working as expected.
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+
+        Thanks for taking the time to report a bug! Please fill out the details below.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Bug Summary
+      description: A concise one-line summary of the bug
+      placeholder: "Brief description of what is broken"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Detailed description of the bug — what you expected vs what happened
+      placeholder: |
+        1. Steps to reproduce:
+        2. What you expected to happen:
+        3. What actually happened:
+        4. Screenshots / logs (if applicable)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Low (minor inconvenience)
+        - Medium (causes workarounds)
+        - High (major feature broken)
+        - Critical (app unusable / data loss)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Frontend (Flutter)
+        - Backend (Django API)
+        - CI/CD
+        - Documentation
+        - Other
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: "OS, device, Flutter/Django version, etc."
+      placeholder: "e.g. iOS 17.4, Flutter 3.24, Chrome 126"
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: "Optional: code snippet or minimal reproduction steps"
+      placeholder: |
+        ```dart
+        // Minimal code to reproduce the issue
+        ```

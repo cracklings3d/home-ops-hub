@@ -1,0 +1,50 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/#installation for installation instructions
+
+repos:
+  # Standard housekeeping
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: ['--maxkb=5120']
+      - id: check-merge-conflict
+      - id: debug-statements
+
+  # Conventional Commits validation
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.6.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+
+  # Python linting & formatting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.0
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+
+  # Flutter / Dart
+  - repo: local
+    hooks:
+      - id: flutter-analyze
+        name: Flutter analyze
+        entry: flutter analyze --no-fatal-infos
+        language: system
+        pass_filenames: false
+        stages: [push]
+        additional_dependencies: []
+
+      - id: flutter-test
+        name: Flutter test
+        entry: flutter test
+        language: system
+        pass_filenames: false
+        stages: [push]
+        additional_dependencies: []

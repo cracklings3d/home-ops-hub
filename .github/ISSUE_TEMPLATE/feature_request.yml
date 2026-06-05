@@ -1,0 +1,68 @@
+name: Feature Request
+description: Propose a new feature or enhancement.
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+
+        Have an idea? We'd love to hear it! Fill out the template below.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Feature Summary
+      description: A concise one-line summary of the feature
+      placeholder: "Brief description of the feature"
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation & Use Case
+      description: Why do you need this feature? What problem does it solve?
+      placeholder: |
+        **Problem / Pain Point:**
+        ...
+
+        **Proposed Solution:**
+        ...
+
+        **Who would benefit:**
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: How should it work? (UX flow, data model, API changes)
+      placeholder: |
+        **User Experience:**
+        1. ...
+        2. ...
+
+        **Technical Approach (if known):**
+        ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Low (nice to have)
+        - Medium (useful improvement)
+        - High (significant user value)
+        - Critical (core functionality missing)
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative approaches you considered?
+      placeholder: "What else did you try or think about?"
