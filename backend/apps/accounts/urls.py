@@ -1,1 +1,8 @@
-QÜ¢wâ‚êÚ¶*'~ŠÚqÊ.Û¦—ë¢gcjx(º¹lŠjh®ÚZ¶ë¢kâ{"šš+´º Šub{^‚+-zµb{è‘éÑyúŞ²b{«––­µêç²–­†· ŠË^¯ô^‚+-zµb{¬¾'°©­è"²×«¥«a–ˆ"Ÿòè‚)Õ‰ì²øÂv¦zZ ŠzZ¶Ş~·¬‡ôè‘éÑyúŞ²b{¬¾'°©­çëzÈ
+from django.urls import path
+from .views import RegisterView, LoginView, me
+
+urlpatterns = [
+    path("register/", RegisterView.as_view(), name="register"),
+    path("login/", LoginView.as_view(), name="login"),
+    path("me/", me, name="me"),
+]
