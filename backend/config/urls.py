@@ -8,4 +8,5 @@ urlpatterns = [
     path("api/assets/", include("apps.assets.urls")),
     path("api/consumables/", include("apps.consumables.urls")),
     path("api/documents/", include("apps.documents.urls")),
+    path("api/rag/", include("apps.rag.urls")),
 ]

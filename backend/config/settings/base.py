@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "apps.assets",
     "apps.consumables",
     "apps.documents",
+    "apps.rag",
 ]
 
 MIDDLEWARE = [
