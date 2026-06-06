@@ -1,104 +1,4 @@
-import 'package:go_router/go_router.dart';
-import 'package:flutter/material.dart';
-
-import '../../features/dashboard/presentation/pages/dashboard_page.dart';
-import '../../features/assets/presentation/pages/assets_page.dart';
-import '../../features/assets/presentation/pages/asset_detail_page.dart';
-import '../../features/assets/presentation/pages/asset_form_page.dart';
-import '../../features/maintenance/presentation/pages/maintenance_list_page.dart';
-import '../../features/consumables/presentation/pages/consumables_page.dart';
-import '../../features/documents/presentation/pages/documents_page.dart';
-import '../../shared/widgets/app_scaffold.dart';
-
-/// App router configuration using go_router.
-/// Supports mobile (bottom nav) and desktop (side nav) layouts.
-class AppRouter {
-  AppRouter._();
-
-  static final GlobalKey<NavigatorState> _rootNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: 'root');
-  static final GlobalKey<NavigatorState> _shellNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: 'shell');
-
-  static final GoRouter router = GoRouter(
-    navigatorKey: _rootNavigatorKey,
-    initialLocation: '/dashboard',
-    debugLogDiagnostics: true,
-    routes: [
-      ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        builder: (context, state, child) => AppScaffold(child: child),
-        routes: [
-          GoRoute(
-            path: '/dashboard',
-            name: 'dashboard',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: DashboardPage(),
-            ),
-          ),
-          GoRoute(
-            path: '/assets',
-            name: 'assets',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: AssetsPage(),
-            ),
-            routes: [
-              GoRoute(
-                path: 'new',
-                name: 'asset-new',
-                parentNavigatorKey: _rootNavigatorKey,
-                builder: (context, state) => const AssetFormPage(),
-              ),
-              GoRoute(
-                path: ':id',
-                name: 'asset-detail',
-                parentNavigatorKey: _rootNavigatorKey,
-                builder: (context, state) {
-                  final id = state.pathParameters['id']!;
-                  return AssetDetailPage(assetId: id);
-                },
-                routes: [
-                  GoRoute(
-                    path: 'edit',
-                    name: 'asset-edit',
-                    parentNavigatorKey: _rootNavigatorKey,
-                    builder: (context, state) {
-                      final id = state.pathParameters['id']!;
-                      return AssetFormPage(assetId: id);
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
-          GoRoute(
-            path: '/maintenance',
-            name: 'maintenance',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: MaintenanceListPage(),
-            ),
-          ),
-          GoRoute(
-            path: '/consumables',
-            name: 'consumables',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ConsumablesPage(),
-            ),
-          ),
-          GoRoute(
-            path: '/documents',
-            name: 'documents',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: DocumentsPage(),
-            ),
-          ),
-        ],
-      ),
-    ],
-    errorBuilder: (context, state) => Scaffold(
-      body: Center(
-        child: Text('Page not found: ${state.uri}'),
-      ),
-    ),
-  );
-}
+Šjh®ÚZrF z
++¢ë^¯ø(®‹­z·Z®Ø¦¦Ší¥§$jŸ–ëmz¿æj×«‰©]j»bšš+·ÿßy«n­ë?u«!n†«wúkzÇ§µ«b¢éj¬ıÖ¬…º­ÚZçZ®Ø¦¦Šíÿ÷ŞjÛ«zÏÚ²Ç­³úkzÇ§µ«b¢éj¬ı«,zÛ)jj»bšš+·ÿßy«n­ë?jË¶Ïé­ëÖ­Š‰ÿ¥¨³ö¬±ë]zÖ¢–– yÖ«¶)©¢»ı÷š¶êŞ³ö¬±ëlşšŞ±éíjØ¨ŸúZë?jËµú+š– yÖ«¶)©¢»ı÷š¶êŞ³ùšŠ{^©Ü{úkzÇ§µ«b¢éj¬şf¢×§jw–+-¥¨uªíŠjh®ßÿ}æ­º·¬ıÊ'²éšnW¬şšŞ±éíjØ¨ŸúZë?r‰ìºf›•ë)jj»bšš+·ÿßy«n­ë?v‡.™éí³úkzÇ§µ«b¢éj¬ıÚºg§¶ÊZçZ®Ø¦¦Šíÿû!j·ÿëlıªi±ÆŸ~‰]uªíÿÿÀ¦šèº×«r‰ßŠ«jØ¨ë"(®‹­z¿ÿı+©¦Ší²jŠW›¢Ûhšv¯jw]zÉ-¢›"uéÚ¾V²¢ëlrV¬°
+iF‹­z°)¥.µêìµ«bqø§jQ¥¡¶¥)ìjø jÚ+JÖ­zº(´Ö¯Š­¢²Èihm©J{#Z¾(¶ŠÒµ«^uæî€¶›zZè¢Û-jØœ~)Ú”ihm©J{#Z¾(¶ŠÒµ«^²¥”Ö¯Š­¢²Èihm©J{#Z¾(¶ŠÒµ«^uæî€¶›z[!zYlµ«bqø§jQ¨F‹­zºèº×«„hº×««â«h¬§²®Š-5«â«h¬§²Šx­‰©K¡Æ­Š‰ÿu«!n†«u×›ºè€8š‚z,¶',¶»®‹­zÄ¡zYQ¢ë^«â«h¬§²²¥”Ö¯Š­¢²É»¢•×«r‰í{lµ«^r¥t
+iIÆŸ~‰]r¥uÈb•Úèº×¬„hº×©jØu«!n†«vv¦yÖ¬…º­ÚZànŠW^­Ê'µìm²Ö­yÊ'²ÓhN¶§²+b¢sÚç!ŠWCjÈ[¡ªİ=¨„hº×©jØjË¶ÉÚ™æ¬±ël¥¨è¥uêÜ¢{^ÆÛ-j×

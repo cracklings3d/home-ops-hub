@@ -1,44 +1,4 @@
-import 'package:flutter/material.dart';
-
-/// Maintenance records list page.
-class MaintenanceListPage extends StatelessWidget {
-  const MaintenanceListPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('ç»´ä¿®è®°å½•')),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          // Quick add
-          Card(
-            child: ListTile(
-              leading: const CircleAvatar(child: Icon(Icons.add)),
-              title: const Text('æ·»åŠ ç»´ä¿®è®°å½•'),
-              subtitle: const Text('è®°å½•è®¾å¤‡ç»´ä¿®ã€æ›´æ¢é…ä»¶ç­‰ä¿¡æ¯'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
-            ),
-          ),
-          const SizedBox(height: 16),
-          // Records
-          ...List.generate(3, (i) => Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.blue.shade50,
-                child: const Icon(Icons.build, color: Colors.blue),
-              ),
-              title: Text(['ç©ºè°ƒæ·±åº¦æ¸…æ´—', 'å‡€æ°´å™¨æ»¤èŠ¯æ›´æ¢', 'æ²¹çƒŸæœºç”µæœºç»´ä¿®'][i]),
-              subtitle: Text(['æ ¼åŠ›ç©ºè°ƒ KFR-35 Â· 2026-06-01', 'å°ç±³å‡€æ°´å™¨ H600G Â· 2026-05-20', 'è€æ¿æ²¹çƒŸæœº 8355 Â· 2026-04-15'][i]),
-              trailing: Text(['Â¥150', 'Â¥280', 'Â¥320'][i], style: const TextStyle(fontWeight: FontWeight.w600)),
-              onTap: () {},
-            ),
-          )),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
-    );
-  }
-}
+Šjh®ÚZrF yùn¶×«şf­z¸š•Ö«·ÿÿ1¨§µéÚÇ«yÊ+vÉb²ÚZç%jËj)ízv§qââ²ÓÚç±µéİ±+Zµé^²Å¢v­r‰ì´Æ¢×§jw.+-=¨²ê^®G²¢÷«®'^Z'`zÖîŠWAº)]
+‰í{\¢{^ÆÚŞ¶êçIÆŸ~‰]jšAj°)¤«¶+eyÊ'²ÔŞÆÖèw"â²Õb{
+ZuØ§Ê'²Ñâ'±ëljYuéÈb•ÚŞŸÿĞº'$i×Bj·\†)].+-N)^•æŠx¢{-
+*Ü•à/jÖ«r¥t‡(œ‡(ÆvØ­•ç(ËS{l¹»b¶Wœ¢{-Mìm¶¶¢–)àr‰ì´‡(œ‡(Ç!zúè¸ †Ú'Mª\¢{-J,Şt1…è †İzÿô^rŠİ°¸¬¶§z¶­{x
