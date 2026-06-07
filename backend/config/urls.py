@@ -9,7 +9,7 @@ urlpatterns = [
     path("api/assets/", include("apps.assets.urls")),
     path("api/documents/", include("apps.documents.urls")),
     path("api/consumables/", include("apps.consumables.urls")),
-    # path("api/maintenance/", include("apps.maintenance.urls")),  # TODO: re-enable after implementing maintenance app
+    path("api/maintenance/", include("apps.maintenance.urls")),
     path("api/rag/", include("apps.rag.urls")),
 ]
 
