@@ -1,2 +1,1 @@
-r‰ßŠ
-ZrF yúè™Ê'~(,zÛbž"šš+¶z*h^4Ô^4
+from .settings import *

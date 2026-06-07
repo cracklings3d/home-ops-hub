@@ -1,1 +1,11 @@
-®ιμΆκάyªi±Κ'~((+
+[run]
+source = .
+omit =
+    */migrations/*
+    */tests/*
+    */__pycache__/*
+    */venv/*
+
+[report]
+show_missing = True
+skip_covered = False

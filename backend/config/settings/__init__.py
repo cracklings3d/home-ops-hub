@@ -1,1 +1,13 @@
-IëmŠx,–†z¸¦¦Ší±úè™éïŠº'™éí±é^r×š‡n•è¦¦Ší¢ÁV‹ø«¢x´CU!0CSuëŞ–Šfz{b|CU¦º¹Ëb¢wë¢jk¡Ûœ¶*'Šjh®Ùè©¡xÓQxÓw¥±çë¢g^½éh¦g§¶)©¢»g¢¦…ãMEãM
+from .base import *
+
+
+import os
+
+env = os.getenv("DJANGO_ENV", "development")
+
+if env == "production":
+    from .production import *
+elif env == "ci":
+    from .ci import *
+else:
+    from .development import *

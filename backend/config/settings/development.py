@@ -1,1 +1,4 @@
-λή–fz{lzΫb(½κλ‰Χ¬m«~ε΅Ζ¥uλί®‰›jΗΆ+¶z*h^4Τ^4ά1P
+from .base import *
+
+DEBUG = True
+ALLOWED_HOSTS = ["*"]
