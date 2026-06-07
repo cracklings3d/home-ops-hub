@@ -10,6 +10,7 @@ on:
     branches: [main, develop]
     paths:
       - 'backend/**'
+      - '.github/workflows/django-tests.yml'
 
 jobs:
   test:
@@ -39,41 +40,41 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
 
       - name: Install dependencies
         run: |
           cd backend
           pip install -r requirements.txt
-          pip install coverage coverage-badge
+          pip install coverage
 
       - name: Run migrations
         env:
-          DATABASE_URL: postgres://test_user:test_password@localhost:5432/home_ops_hub_test
+          DATABASE_URL: postgres://test_user:***@localhost:5432/home_ops_hub_test
         run: |
           cd backend
           python manage.py migrate --settings=config.settings.ci
 
       - name: Django system check
         env:
-          DATABASE_URL: postgres://test_user:test_password@localhost:5432/home_ops_hub_test
+          DATABASE_URL: postgres://test_user:***@localhost:5432/home_ops_hub_test
         run: |
           cd backend
           python manage.py check
 
       - name: Run tests with coverage
         env:
-          DATABASE_URL: postgres://test_user:test_password@localhost:5432/home_ops_hub_test
+          DATABASE_URL: postgres://test_user:***@localhost:5432/home_ops_hub_test
           COVERAGE_PROCESS_START: .coveragerc
         run: |
           cd backend
-          coverage run manage.py test --settings=config.settings.ci
+          coverage run manage.py test --settings=config.settings.ci --verbosity=1
           coverage combine
           coverage report --show-missing
           coverage xml
-        continue-on-error: true
 
-      - name: Upload coverage
-        if: always()
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           files: ./backend/coverage.xml
@@ -84,4 +85,10 @@ jobs:
           pip install ruff
           cd backend
           ruff check .
-        continue-on-error: true
+
+      - name: Django check --deploy
+        env:
+          DATABASE_URL: postgres://test_user:***@localhost:5432/home_ops_hub_test
+        run: |
+          cd backend
+          python manage.py check --deploy --settings=config.settings.ci

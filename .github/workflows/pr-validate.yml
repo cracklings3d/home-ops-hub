@@ -1,0 +1,64 @@
+name: Validate PR
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  validate-issue:
+    name: Check issue reference
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR body references exactly one issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const body = pr.body || '';
+            
+            // Find all issue references: Closes #N, Fixes #N, Ref #N, #N
+            const issueRefs = body.match(/(?:closes?|fixes?|ref|see|relates?\s+to)\s+#(\d+)|#(\d+)/gi) || [];
+            
+            // Extract unique issue numbers
+            const issues = [...new Set(issueRefs.map(ref => {
+              const match = ref.match(/#(\d+)/i);
+              return match ? parseInt(match[1]) : null;
+            }).filter(n => n !== null))];
+            
+            if (issues.length === 0) {
+              core.setFailed('❌ PR must reference exactly one issue. Add "Closes #N" or "Fixes #N" or "#N" to the PR description.');
+              core.info('   Example: "Closes #42" or "Fixes #99"');
+              process.exit(1);
+            }
+            
+            if (issues.length > 1) {
+              core.setFailed(`❌ PR references ${issues.length} issues (${issues.map(i => '#'+i).join(', ')}). Only one issue is allowed per PR.`);
+              process.exit(1);
+            }
+            
+            const issueNum = issues[0];
+            core.info(`✅ PR references issue #${issueNum}`);
+            
+            // Verify the issue exists and is open
+            try {
+              const issue = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNum
+              });
+              
+              if (!issue.data.open) {
+                core.setFailed(`❌ Issue #${issueNum} is closed. Cannot merge a PR against a closed issue.`);
+                process.exit(1);
+              }
+              
+              // Check if issue has a milestone (should have one)
+              if (!issue.data.milestone) {
+                core.warning(`⚠️  Issue #${issueNum} has no milestone. Consider adding one.`);
+              }
+              
+              core.info(`✅ Issue #${issueNum} "${issue.data.title}" is open`);
+            } catch (e) {
+              core.setFailed(`❌ Issue #${issueNum} not found or inaccessible.`);
+              process.exit(1);
+            }
