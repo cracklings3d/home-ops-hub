@@ -1,1 +1,16 @@
-6§‚€¨­àãjx(ç^vv6§‚ŠÞ²×ëjg°¢¹
+Django>=4.2,<5.0
+djangorestframework>=3.14.0
+djangorestframework-simplejwt>=5.3.0
+django-cors-headers>=4.3.0
+python-dotenv>=1.0.0
+Pillow>=10.0.0
+qdrant-client>=1.7.0
+httpx>=0.25.0
+langchain>=0.1.0
+langchain-community>=0.0.10
+pydantic>=2.0.0
+pytest>=7.4.0
+pytest-django>=4.7.0
+pytest-cov>=4.1.0
+factory-boy>=3.3.0
+coverage>=7.3.0
